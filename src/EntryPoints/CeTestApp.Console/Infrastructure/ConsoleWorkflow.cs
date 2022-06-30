@@ -15,7 +15,8 @@ public class ConsoleWorkflow : IConsoleWorkflow
 
     public async Task<string> GetInProgressOrdersAsStringAsync()
     {
-        var orders = await Workflow.GetOrdersInProgressAsync();
+        var orders = await Workflow.GetOrdersInProgressAsync()
+            .ConfigureAwait(false);
 
         var sb = new StringBuilder(orders.Count);
         foreach (var order in orders)
@@ -26,7 +27,8 @@ public class ConsoleWorkflow : IConsoleWorkflow
 
     public async Task<string> GetTop5ProductsAsStringAsync()
     {
-        var products = await Workflow.GetTop5ProductsAsync();
+        var products = await Workflow.GetTop5ProductsAsync()
+            .ConfigureAwait(false);
 
         var sb = new StringBuilder(products.Count);
         foreach (var product in products)
@@ -39,8 +41,10 @@ public class ConsoleWorkflow : IConsoleWorkflow
 
     public async Task<SetProductStockResponse> SetStockTo25ToRandomProductAsync()
     {
-        var products = await Workflow.GetTop5ProductsAsync();
-        return await SetRandomProductStockTo25Async(products);
+        var products = await Workflow.GetTop5ProductsAsync()
+            .ConfigureAwait(false);
+        return await SetRandomProductStockTo25Async(products)
+            .ConfigureAwait(false);
     }
     
     private async Task<SetProductStockResponse> SetRandomProductStockTo25Async(List<ProductDto> products)
@@ -58,7 +62,8 @@ public class ConsoleWorkflow : IConsoleWorkflow
             MerchantProductNo = product.MerchantProductNo,
             Stock = stockSize
         };
-        Workflow.SetProductStockAsync(setStockCommand);
+        await Workflow.SetProductStockAsync(setStockCommand)
+            .ConfigureAwait(false);
 
         return new SetProductStockResponse
         {
