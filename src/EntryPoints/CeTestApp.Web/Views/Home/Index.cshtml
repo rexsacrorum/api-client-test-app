@@ -1,8 +1,17 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Home
+
+@{
+    ViewData["Title"] = "ChannelEngine Test App";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Orders in progress.</h2>
+
+@await Html.PartialAsync("_orders", Model.OrdersInProgress)
+
+<h2>Top 5 products.</h2>
+
+@await Html.PartialAsync("_products", Model.Top5Products)
+
+<h2>Set random product stock</h2>
+
+@await  Html.PartialAsync("_setProductStock", Model.SetProductStockCommand)

@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using CeTestApp.Web.Application.Interfaces;
+using CeTestApp.Web.Infrastructure.Workflows;
 using Microsoft.AspNetCore.Mvc;
 using CeTestApp.Web.Models;
 
@@ -6,21 +8,18 @@ namespace CeTestApp.Web.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger,
+        IHomeWorkflow workflow)
     {
         _logger = logger;
+        Workflow = workflow;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
+        var model = await Workflow.GetResultOfAllOperationsAsync();
+        
+        return View(model);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -28,4 +27,7 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    
+    private readonly ILogger<HomeController> _logger;
+    private IHomeWorkflow Workflow { get; }
 }

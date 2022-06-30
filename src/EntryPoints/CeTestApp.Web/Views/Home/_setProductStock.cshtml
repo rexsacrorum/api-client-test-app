@@ -1,0 +1,10 @@
+﻿@model CeTestApp.Web.Domain.Contracts.SetProductStockCommand
+
+@if (Model != null)
+{
+    <span>Stock of product with merchant product number '@Model.MerchantProductNo' was set to @Model.Stock</span>
+}
+else
+{
+    <span>There ara were no products to choose from.</span>
+}
