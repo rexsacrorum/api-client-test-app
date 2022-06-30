@@ -17,7 +17,8 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var model = await Workflow.GetResultOfAllOperationsAsync();
+        var model = await Workflow.GetResultOfAllOperationsAsync()
+            .ConfigureAwait(false);
         
         return View(model);
     }

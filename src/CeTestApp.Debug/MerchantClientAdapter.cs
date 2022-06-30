@@ -80,7 +80,7 @@ public class MerchantClientAdapter
             BasePath = "https://api-dev.channelengine.net/api/",
             ApiKey = new ConcurrentDictionary<string, string>()
         };
-        conf.ApiKey.Add("apikey", "HERE_WAS_AN_API_KEY");
+        conf.ApiKey.Add("apikey", "541b989ef78ccb1bad630ea5b85c6ebff9ca3322");
         
         return conf;
     }

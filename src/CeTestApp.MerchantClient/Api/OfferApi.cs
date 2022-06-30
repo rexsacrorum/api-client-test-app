@@ -11,7 +11,7 @@ public class OfferApi : BaseApi, IOfferApi
 
     public async Task<OrderStockPriceUpdateResponse> OfferStockPriceUpdateAsync(List<StockPriceUpdateRequest> request)
     {
-        var response = await OfferStockPriceUpdateWithHttpInfoAsync(request);
+        var response = await OfferStockPriceUpdateWithHttpInfoAsync(request).ConfigureAwait(false);
         return response.Data;
     }
 
@@ -25,7 +25,8 @@ public class OfferApi : BaseApi, IOfferApi
 
         requestOptions.Data = request;
 
-        var response = await Client.PutAsync<OrderStockPriceUpdateResponse>("/v2/offer", requestOptions, Configuration);
+        var response = await Client.PutAsync<OrderStockPriceUpdateResponse>("/v2/offer", requestOptions, Configuration)
+            .ConfigureAwait(false);
 
         if (ExceptionFactory != null)
         {

@@ -12,18 +12,18 @@ public class ApiClient : IApiClient
         Client = client;
     }
 
-    public Task<ApiResponse<T>> GetAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration)
+    public async Task<ApiResponse<T>> GetAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration)
     {
         var request = NewRequest(HttpMethod.Get, path, options, configuration);
 
-        return ExecAsync<T>(request, configuration);
+        return await ExecAsync<T>(request, configuration);
     }
 
-    public Task<ApiResponse<T>> PutAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration)
+    public async Task<ApiResponse<T>> PutAsync<T>(string path, RequestOptions options, IReadableConfiguration configuration)
     {
         var request = NewRequest(HttpMethod.Put, path, options, configuration);
 
-        return ExecAsync<T>(request, configuration);
+        return await ExecAsync<T>(request, configuration).ConfigureAwait(false);
     }
     
     private async Task<ApiResponse<T>> ExecAsync<T>(HttpRequestMessage request, IReadableConfiguration configuration)

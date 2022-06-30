@@ -20,7 +20,8 @@ public class MerchantWorkflow : IMerchantWorkflow
 
     public async Task<List<OrderDto>> GetOrdersInProgressAsync()
     {
-        var response = await GetInProgressOrdersResponseAsync();
+        var response = await GetInProgressOrdersResponseAsync()
+            .ConfigureAwait(false);
         
         return response.Content
             .Select(response => Mapper.ToOrderDto(response))
@@ -29,7 +30,8 @@ public class MerchantWorkflow : IMerchantWorkflow
 
     public async Task<List<ProductDto>> GetTop5ProductsAsync()
     {
-        var response = await GetInProgressOrdersResponseAsync();
+        var response = await GetInProgressOrdersResponseAsync()
+            .ConfigureAwait(false);
         
         var orders = response.Content; 
         
@@ -59,7 +61,7 @@ public class MerchantWorkflow : IMerchantWorkflow
         var updateRequest = Mapper.ToStockPriceUpdateRequest(command);
         request.Add(updateRequest);
 
-        await OfferApi.OfferStockPriceUpdateAsync(request);
+        await OfferApi.OfferStockPriceUpdateAsync(request).ConfigureAwait(false);
     }
     
     private async Task<CollectionOfOrdersResponse> GetInProgressOrdersResponseAsync()
@@ -68,7 +70,7 @@ public class MerchantWorkflow : IMerchantWorkflow
         {
             Statuses = new List<OrderStatus> { OrderStatus.IN_PROGRESS }
         };
-        return await OrderApi.OrderGetByFilterAsync(request);
+        return await OrderApi.OrderGetByFilterAsync(request).ConfigureAwait(false);
     }
     
     private IOfferApi OfferApi { get; }
