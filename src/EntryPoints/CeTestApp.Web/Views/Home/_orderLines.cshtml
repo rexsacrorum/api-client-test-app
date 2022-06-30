@@ -1,0 +1,22 @@
+﻿@model List<CeTestApp.Web.Domain.Contracts.OrderLineContract>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Description</th>
+        <th scope="col">Gtin</th>
+        <th scope="col">Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var line in Model)
+    {
+        <tr>
+            <td>@line.Description</td>
+            <td>@line.Gtin</td>
+            <td>@line.Quantity</td>
+        </tr>
+    }
+    </tbody>
+</table>

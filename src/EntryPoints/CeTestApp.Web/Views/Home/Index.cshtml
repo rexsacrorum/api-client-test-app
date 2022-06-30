@@ -1,0 +1,17 @@
+﻿@model Home
+
+@{
+    ViewData["Title"] = "ChannelEngine Test App";
+}
+
+<h2>Orders in progress.</h2>
+
+@await Html.PartialAsync("_orders", Model.OrdersInProgress)
+
+<h2>Top 5 products.</h2>
+
+@await Html.PartialAsync("_products", Model.Top5Products)
+
+<h2>Set random product stock</h2>
+
+@await  Html.PartialAsync("_setProductStock", Model.SetProductStockCommand)
