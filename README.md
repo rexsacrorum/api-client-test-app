@@ -10,7 +10,7 @@
 ## Pros of implementation
 
 * DI even in console app.
-* Ssync all way through
+* Async all the way through.
 * Individual convetional commits
 * Clean architecture, Solid, CQRS.
 * Sensitive information not stored in VCS
