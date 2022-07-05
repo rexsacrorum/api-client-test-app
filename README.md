@@ -1,4 +1,4 @@
-# ChannelEngine test application
+# Test application
 
 ## What was done
 
